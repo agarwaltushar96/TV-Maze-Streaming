@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+.displayShows {
+    color: white;
+    padding-top: 18%;
+    position: absolute;
+    z-index: 0;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Ubuntu Mono', monospace;
+    background-color: transparent;
+}
+
+.showBox {
+    width: 26.2ch;
+    height: 45.5ch;
+    margin: 0px 23px 23px 0px;
+    background-color: #11292e;
+    border: 3px solid darkorange;
+    border-radius: 10px;
+    transition: transform 280ms;
+    position: relative;
+}
+
+.showBox:hover,
+.showBox:focus {
+    transform: scale(1.25);
+    z-index: 1;
+}
+
+.detailBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.titleBox {
+    overflow: hidden;
+    font-weight: 600;
+    padding: 5px;
+    width: 25ch;
+}
+
+.details {
+    width: 95%;
+    font-weight: 400;
+    padding: 5px;
+    position: absolute;
+    bottom: 0;
+}
