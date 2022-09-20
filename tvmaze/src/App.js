@@ -1,8 +1,9 @@
-//import Shows from "./Components/Shows/Shows";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Dropdown from "./Components/Dropdown/Dropdown";
+import Loader from "./Components/Loader/Loader";
 import Shows from "./Components/Shows/Shows";
+import { useSearchParams } from "react-router-dom";
 
 function App() {
   const [inputValue, setInput] = useState("");
@@ -16,6 +17,14 @@ function App() {
   const [radioCheckD, setRadioD] = useState("actor");
   const [searchVal, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [results, setResults] = useState(false);
+  const [searchParam, setSearchParam] = useSearchParams();
+  // const typedParam = searchParam.get("search");
+  // console.log(typedParam);
+  // if (typedParam !== "") {
+  //   //setSearch(typedParam);
+  //   in = typedParam;
+  // }
 
   function sleep(time) {
     const p = new Promise((res, rej) => {
@@ -89,6 +98,7 @@ function App() {
   }, [inputValue]);
 
   useEffect(() => {
+    setShowDropdown(false);
     if (searchVal !== "") {
       (async () => {
         await getAPI(searchVal, false);
@@ -126,13 +136,15 @@ function App() {
   }
 
   function submitFunction(e) {
-    console.log("from dropdwon");
     const val = e.target.innerHTML;
-    console.log(val);
-    console.log(radioCheck);
+
     document.getElementById("typingBox").value = "";
 
     if (val !== "") {
+      setResults(true);
+      setSearchParam({ search: searchVal });
+      // if (typedParam !== "") setInput(typedParam);
+      // else
       setInput(val);
       setSearch("");
       document.getElementById("errorDisplay").style.display = "none";
@@ -146,10 +158,14 @@ function App() {
   function transferInput(e) {
     e.preventDefault();
     const val = e.target.elements[0].value;
-
     document.getElementById("typingBox").value = "";
     if (val !== "") {
+      setResults(true);
+      setSearchParam({ search: searchVal });
+      // if (typedParam !== "") setInput(typedParam);
+      // else
       setInput(val);
+      console.log(inputValue);
       setSearch("");
       document.getElementById("errorDisplay").style.display = "none";
     } else {
@@ -184,8 +200,10 @@ function App() {
             width: "100%",
           }}
         >
-          <div>
-            <h2 className="title">TV Maze</h2>
+          <div style={{ width: "195px" }}>
+            <a href="/" className="linkTitle">
+              <h2 className="title">TV Maze</h2>
+            </a>
           </div>
           <form className="radios">
             <label onClick={radioSelect} id="By Actor">
@@ -222,23 +240,31 @@ function App() {
               </div>
               <button type="submit">Search</button>
             </form>
-            <Dropdown
-              inputAct={viewActorD}
-              inputSh={viewShowD}
-              searchvalue={searchVal}
-              radioselect={radioCheckD}
-              submitFunction={submitFunction}
-              deselect={showDropdown}
-            />
+            {!showDropdown && (
+              <Dropdown
+                inputAct={viewActorD}
+                inputSh={viewShowD}
+                searchvalue={searchVal}
+                radioselect={radioCheckD}
+                submitFunction={submitFunction}
+              />
+            )}
             <div id="errorDisplay"></div>
           </div>
         </div>
 
-        <Shows
-          viewActorShow={viewActorShow}
-          viewShow={viewShow}
-          property={radioCheck}
-        />
+        <div>
+          {loading ? (
+            <Loader />
+          ) : (
+            <Shows
+              viewActorShow={viewActorShow}
+              viewShow={viewShow}
+              property={radioCheck}
+              results={results}
+            />
+          )}
+        </div>
 
         {/* {!loading && <div>{view ? displayUI() : <>No results found</>}</div>}
       {loading && <div>Loading .... . .... .... .... </div>} */}

@@ -2,24 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./Dropdown.css";
 
 function Dropdown(props) {
-  const {
-    radioselect,
-    searchvalue,
-    inputAct,
-    inputSh,
-    submitFunction,
-    deselect,
-  } = props;
+  const { radioselect, searchvalue, inputAct, inputSh, submitFunction } = props;
   const [property, setProp] = useState({ display: "none" });
 
   useEffect(() => {
     if (searchvalue !== "") setProp({ display: "block" });
     else setProp({ display: "none" });
-  }, [searchvalue, deselect]);
-
-  useEffect(() => {
-    if (deselect === true) setProp({ display: "none" });
-  }, [deselect]);
+  }, [searchvalue]);
 
   return (
     <>

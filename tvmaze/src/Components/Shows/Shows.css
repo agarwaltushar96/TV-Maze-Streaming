@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
 .displayShows {
     color: white;
-    padding-top: 18%;
+    padding-top: 280px;
     position: absolute;
     z-index: 0;
     display: flex;
@@ -11,9 +11,28 @@
     background-color: transparent;
 }
 
+.displayShowError {
+    animation: load 5s normal backwards;
+    padding-top: 250px;
+    position: absolute;
+    z-index: 0;
+    color: red;
+    font-size: 20px;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+@keyframes load {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
 .showBox {
     width: 26.2ch;
-    height: 45.5ch;
+    height: 47.5ch;
     margin: 0px 23px 23px 0px;
     background-color: #11292e;
     border: 3px solid darkorange;

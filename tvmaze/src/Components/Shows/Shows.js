@@ -5,13 +5,12 @@ import "./Shows.css";
 // for actor, ._embedded.show.name/._embedded.show.premiered/._embedded.show.rating.average/._embedded.show.image.medium or original or null/._embedded.show.network.name
 
 function Shows(props) {
-  const { viewActorShow, viewShow, property } = props;
+  const { viewActorShow, viewShow, property, results } = props;
   //console.log(viewActorShow);
   // useEffect(() => {
   //   if (property === true) setProp({ display: "block" });
   //   else setProp({ display: "none" });
   // }, [property]);
-
   return (
     <>
       {property === "show" ? (
@@ -33,11 +32,15 @@ function Shows(props) {
                       <div className="titleBox">{item.show.name}</div>
                       <div className="details">
                         <div style={{ display: "inline-block" }}>
-                          {item.show.premiered.slice(0, 4)}
+                          {item.show.premiered &&
+                            item.show.premiered.slice(0, 4)}
                         </div>
                         {item.show.rating.average && (
                           <div
-                            style={{ display: "inline-block", float: "right" }}
+                            style={{
+                              display: "inline-block",
+                              float: "right",
+                            }}
                           >
                             Rating {item.show.rating.average}
                           </div>
@@ -50,7 +53,7 @@ function Shows(props) {
             })}
           </div>
         ) : (
-          <div style={{ color: "red" }}>NO RESULTS FOUND</div>
+          results && <div className="displayShowError">NO RESULTS FOUND</div>
         )
       ) : viewActorShow.length !== 0 ? (
         <div className="displayShows">
@@ -71,11 +74,15 @@ function Shows(props) {
                       <div className="titleBox">{item._embedded.show.name}</div>
                       <div className="details">
                         <div style={{ display: "inline-block" }}>
-                          {item._embedded.show.premiered.slice(0, 4)}
+                          {item._embedded.show.premiered &&
+                            item._embedded.show.premiered.slice(0, 4)}
                         </div>
                         {item._embedded.show.rating.average && (
                           <div
-                            style={{ display: "inline-block", float: "right" }}
+                            style={{
+                              display: "inline-block",
+                              float: "right",
+                            }}
                           >
                             Rating {item._embedded.show.rating.average}
                           </div>
@@ -89,9 +96,7 @@ function Shows(props) {
           })}
         </div>
       ) : (
-        <div className="displayShows" style={{ color: "red" }}>
-          NO RESULTS FOUND
-        </div>
+        results && <div className="displayShowError">NO RESULTS FOUND</div>
       )}
     </>
   );
