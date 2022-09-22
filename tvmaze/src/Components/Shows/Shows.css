@@ -52,6 +52,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
+    font-size: 17.5px;
+    color: #c7f6fd;
 }
 
 .titleBox {

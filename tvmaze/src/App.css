@@ -103,9 +103,9 @@ input[type="radio"]:checked+label::before {
 }
 
 .inputBox input:focus {
-    border: 3px solid #db9226;
+    border: 3px solid #fd9b08;
     outline: none;
-    transition: 0.3s ease-in;
+    transition: 0.25s ease-in;
 }
 
 .inputBox button {

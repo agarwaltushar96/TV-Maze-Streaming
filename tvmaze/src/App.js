@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import Dropdown from "./Components/Dropdown/Dropdown";
 import Loader from "./Components/Loader/Loader";
 import Shows from "./Components/Shows/Shows";
-import { useSearchParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [inputValue, setInput] = useState("");
@@ -18,13 +18,7 @@ function App() {
   const [searchVal, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [results, setResults] = useState(false);
-  const [searchParam, setSearchParam] = useSearchParams();
-  // const typedParam = searchParam.get("search");
-  // console.log(typedParam);
-  // if (typedParam !== "") {
-  //   //setSearch(typedParam);
-  //   in = typedParam;
-  // }
+  // const [historyDropdown, setHistoryDropdown] = useState(false);
 
   function sleep(time) {
     const p = new Promise((res, rej) => {
@@ -109,42 +103,25 @@ function App() {
       document.getElementsByClassName("fa fa-times")[0].style.display = "none";
   }, [searchVal]);
 
-  // function displayUI() {
-  //   return (
-  //     view &&
-  //     view?.map((obj) => {
-  //       return (
-  //         <>
-  //           <div>Name: {obj.show.name}</div>
-  //           <div>Runtime: {obj.show.runtime}</div>
-  //         </>
-  //       );
-  //     })
-  //   );
-  // }
-
   function radioSelect(e) {
     setInput("");
-    setActor([]);
     setSearch("");
-
+    // setResults(false);
     document.getElementById("typingBox").value = "";
-    if (e.target.id === "By Actor" || e.target.id === "actor")
+    if (e.target.id === "By Actor" || e.target.id === "actor") {
+      // setRadio("actor");
       document.getElementById("typingBox").placeholder = "eg. Daniel Craig";
-    else
+    } else {
+      // setRadio("show");
       document.getElementById("typingBox").placeholder = "eg. Peaky Blinders";
+    }
   }
 
   function submitFunction(e) {
     const val = e.target.innerHTML;
-
     document.getElementById("typingBox").value = "";
-
     if (val !== "") {
       setResults(true);
-      setSearchParam({ search: searchVal });
-      // if (typedParam !== "") setInput(typedParam);
-      // else
       setInput(val);
       setSearch("");
       document.getElementById("errorDisplay").style.display = "none";
@@ -160,10 +137,27 @@ function App() {
     const val = e.target.elements[0].value;
     document.getElementById("typingBox").value = "";
     if (val !== "") {
+      // if (radioCheck === "actor") {
+      //   if (window.localStorage.getItem("actorHistory") === null)
+      //     window.localStorage.setItem("actorHistory", val);
+      //   else {
+      //     const historyResults = [];
+      //     historyResults.push(window.localStorage.getItem("actorHistory"));
+      //     historyResults.push(val);
+      //     window.localStorage.setItem("actorHistory", historyResults);
+      //   }
+      // } else {
+      //   if (window.localStorage.getItem("showHistory") === null)
+      //     window.localStorage.setItem("showHistory", val);
+      //   else {
+      //     const historyResults = [];
+      //     historyResults.push(window.localStorage.getItem("showHistory"));
+      //     historyResults.push(val);
+      //     window.localStorage.setItem("showHistory", historyResults);
+      //   }
+      // }
+
       setResults(true);
-      setSearchParam({ search: searchVal });
-      // if (typedParam !== "") setInput(typedParam);
-      // else
       setInput(val);
       console.log(inputValue);
       setSearch("");
@@ -174,10 +168,32 @@ function App() {
     }
   }
 
+  function debounce(func) {
+    let timer;
+    return function (...args) {
+      const context = this;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = null;
+        func.apply(context, args);
+      }, 400);
+    };
+  }
+
+  const optimize = useCallback(debounce(getDropdown), []);
+
   function getDropdown(e) {
+    // setHistoryDropdown(false);
     setSearch(e.target.value);
     document.getElementById("errorDisplay").style.display = "none";
   }
+
+  // function history() {
+  //   if (searchVal === "") {
+  //     console.log("true");
+  //     setHistoryDropdown(true);
+  //   }
+  // }
 
   function clear() {
     setSearch("");
@@ -234,7 +250,8 @@ function App() {
                   type="text"
                   placeholder="eg. Daniel Craig"
                   id="typingBox"
-                  onChange={getDropdown}
+                  onChange={optimize}
+                  // onClick={history}
                 />
                 <i className="fa fa-times" onClick={clear}></i>
               </div>
@@ -247,6 +264,7 @@ function App() {
                 searchvalue={searchVal}
                 radioselect={radioCheckD}
                 submitFunction={submitFunction}
+                // historyDropdown={historyDropdown}
               />
             )}
             <div id="errorDisplay"></div>
@@ -269,6 +287,9 @@ function App() {
         {/* {!loading && <div>{view ? displayUI() : <>No results found</>}</div>}
       {loading && <div>Loading .... . .... .... .... </div>} */}
       </div>
+      <Routes>
+        <Route exact path="/search" element={<Shows />}></Route>
+      </Routes>
     </>
   );
 }

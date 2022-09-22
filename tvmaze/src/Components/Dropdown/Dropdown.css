@@ -18,5 +18,6 @@
 }
 
 .dropSelect:hover {
-    background-color: grey;
+    background-color: #F0C993;
+    color: #105D97;
 }
