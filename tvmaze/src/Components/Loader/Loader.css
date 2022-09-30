@@ -12,7 +12,7 @@
 }
 
 .loading {
-    animation: load 4s normal forwards;
+    animation: load 2.8s normal forwards;
     box-shadow: 0 0 10px #fff;
     border-radius: 100px;
     background: #fff;

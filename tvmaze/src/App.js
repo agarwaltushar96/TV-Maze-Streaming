@@ -44,7 +44,7 @@ function App() {
   }
   async function getAPI(inputValue, fromWhere) {
     if (fromWhere) {
-      await sleep(3000);
+      await sleep(3400);
       if (document.getElementById("actor").checked === true) {
         const response = await fetch(
           `https://api.tvmaze.com/search/people?q=${inputValue}`
@@ -87,6 +87,7 @@ function App() {
         setLoading(true);
         await getAPI(inputValue, true);
         setLoading(false);
+        setResults(true);
       })();
     }
   }, [inputValue]);
@@ -104,7 +105,7 @@ function App() {
   }, [searchVal]);
 
   function radioSelect(e) {
-    setInput("");
+    //setInput("");
     setSearch("");
     // setResults(false);
     document.getElementById("typingBox").value = "";
@@ -121,7 +122,6 @@ function App() {
     const val = e.target.innerHTML;
     document.getElementById("typingBox").value = "";
     if (val !== "") {
-      setResults(true);
       setInput(val);
       setSearch("");
       document.getElementById("errorDisplay").style.display = "none";
@@ -157,7 +157,6 @@ function App() {
       //   }
       // }
 
-      setResults(true);
       setInput(val);
       console.log(inputValue);
       setSearch("");
@@ -165,6 +164,9 @@ function App() {
     } else {
       document.getElementById("errorDisplay").innerHTML = "* TYPE SOMETHING";
       document.getElementById("errorDisplay").style.display = "block";
+      // document.getElementById("typingBox").style.border = "3px solid red";
+      // document.getElementById("typingBox").style.outline = "none";
+      // document.getElementById("typingBox").style.transition = "0.25s ease-in";
     }
   }
 
@@ -280,6 +282,7 @@ function App() {
               viewShow={viewShow}
               property={radioCheck}
               results={results}
+              input={inputValue}
             />
           )}
         </div>

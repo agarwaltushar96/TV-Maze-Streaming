@@ -24,6 +24,22 @@ function Dropdown(props) {
     //}
   }, [searchvalue]);
 
+  // function selectDown(ev) {
+  //   console.log("down");
+  //   if (ev.target.nextElementSibling) {
+  //     ev.target.nextElementSibling.style.backgroundColor = "#F0C993";
+  //     ev.target.nextElementSibling.style.color = "#105D97";
+  //   }
+  // }
+
+  // function selectUp(ev) {
+  //   console.log("up");
+  //   if (ev.target.previousElementSibling) {
+  //     ev.target.previousElementSibling.style.backgroundColor = "#F0C993";
+  //     ev.target.previousElementSibling.style.color = "#105D97";
+  //   }
+  // }
+
   return (
     <>
       {/* {historyDropdown ? (
@@ -71,6 +87,8 @@ function Dropdown(props) {
                 className="dropSelect"
                 style={{ cursor: "pointer" }}
                 onClick={submitFunction}
+                // onKeyDown={selectDown}
+                // onKeyUp={selectUp}
               >
                 {item.show.name}
               </div>
@@ -83,6 +101,8 @@ function Dropdown(props) {
                 className="dropSelect"
                 style={{ cursor: "pointer" }}
                 onClick={submitFunction}
+                // onKeyDown={selectDown}
+                // onKeyUp={selectUp}
               >
                 {item.person.name}
               </div>

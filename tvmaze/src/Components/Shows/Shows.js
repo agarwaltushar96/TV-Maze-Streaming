@@ -1,18 +1,14 @@
 import React from "react";
 import "./Shows.css";
 
-// for show, .show.name/.show.premiered/.show.rating.average/.show.image.medium or .original or null
-// for actor, ._embedded.show.name/._embedded.show.premiered/._embedded.show.rating.average/._embedded.show.image.medium or original or null/._embedded.show.network.name
-
 function Shows(props) {
-  const { viewActorShow, viewShow, property, results } = props;
-  //console.log(viewActorShow);
-  // useEffect(() => {
-  //   if (property === true) setProp({ display: "block" });
-  //   else setProp({ display: "none" });
-  // }, [property]);
+  const { viewActorShow, viewShow, property, results, input } = props;
+
   return (
     <>
+      {input && (
+        <div className="search_Results">Search Results for "{input}"</div>
+      )}
       {property === "show" ? (
         viewShow.length !== 0 ? (
           <div className="displayShows">

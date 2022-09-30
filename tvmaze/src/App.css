@@ -135,4 +135,5 @@ input[type="radio"]:checked+label::before {
     display: none;
     color: red;
     font-size: 18px;
+    font-weight: bolder;
 }

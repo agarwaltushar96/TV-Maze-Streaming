@@ -1,72 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
-.displayShows {
-    color: white;
-    padding-top: 280px;
-    position: absolute;
-    z-index: 0;
-    display: flex;
-    flex-wrap: wrap;
-    font-family: 'Ubuntu Mono', monospace;
-    background-color: transparent;
-}
-
-.displayShowError {
-    animation: load 5s normal backwards;
-    padding-top: 250px;
-    position: absolute;
-    z-index: 0;
-    color: red;
-    font-size: 20px;
-    font-family: 'Ubuntu Mono', monospace;
-}
-
-@keyframes load {
-    0% {
-        width: 0;
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Abel&family=Roboto&display=swap');
+    .displayShows {
+        color: white;
+        padding-top: 280px;
+        position: absolute;
+        z-index: 0;
+        display: flex;
+        flex-wrap: wrap;
+        font-family: 'Abel', sans-serif;
+        font-family: 'Roboto', sans-serif;
+        background-color: transparent;
     }
-    100% {
-        width: 100%;
+    
+    .search_Results {
+        position: absolute;
+        margin-top: 235px;
+        font-size: 20px;
     }
-}
-
-.showBox {
-    width: 26.2ch;
-    height: 47.5ch;
-    margin: 0px 23px 23px 0px;
-    background-color: #11292e;
-    border: 3px solid darkorange;
-    border-radius: 10px;
-    transition: transform 280ms;
-    position: relative;
-}
-
-.showBox:hover,
-.showBox:focus {
-    transform: scale(1.25);
-    z-index: 1;
-}
-
-.detailBox {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    font-size: 17.5px;
-    color: #c7f6fd;
-}
-
-.titleBox {
-    overflow: hidden;
-    font-weight: 600;
-    padding: 5px;
-    width: 25ch;
-}
-
-.details {
-    width: 95%;
-    font-weight: 400;
-    padding: 5px;
-    position: absolute;
-    bottom: 0;
-}
+    
+    .displayShowError {
+        animation: load 5s normal backwards;
+        padding-top: 280px;
+        position: absolute;
+        z-index: 0;
+        color: red;
+        font-size: 20px;
+        font-family: 'Abel', sans-serif;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    @keyframes load {
+        0% {
+            width: 0;
+        }
+        100% {
+            width: 100%;
+        }
+    }
+    
+    .showBox {
+        width: 23.4ch;
+        height: 45ch;
+        margin: 0px 23px 23px 0px;
+        background-color: #11292e;
+        border: 3px solid darkorange;
+        border-radius: 10px;
+        transition: transform 280ms;
+        position: relative;
+    }
+    
+    .showBox:hover,
+    .showBox:focus {
+        transform: scale(1.25);
+        z-index: 1;
+    }
+    
+    .detailBox {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        font-size: 17.5px;
+        color: #c7f6fd;
+    }
+    
+    .titleBox {
+        overflow: hidden;
+        padding: 5px;
+        width: 25ch;
+    }
+    
+    .details {
+        width: 95%;
+        font-weight: 400;
+        padding: 5px;
+        position: absolute;
+        bottom: 0;
+    }
